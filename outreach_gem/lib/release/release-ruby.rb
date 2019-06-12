@@ -30,46 +30,68 @@ class Release
         }
     end
 
+    # Remove the word -SNAPSHOT from a string
+    # @param version [String] remove the word SNAPSHOT from the version string
+    # @return [String] String without the word -SNAPSHOT
     def self.removeSnapshot(version)
         return version.sub('-SNAPSHOT', '')
     end
 
+    # Get the maven version of a project, must have maven 3.x or higher installed
+    # @param projectLocation [String] Change directories to the projectLocation location
+    # @param newVersion [String] Change the maven project version to the newVersion
     def self.mavenVersion(projectLocation, newVersion)
         Dir.chdir(projectLocation){
             `mvn versions:set -DnewVersion=#{newVersion} -DgenerateBackupPoms=false`
         }
     end
 
+    # Perform a merge operation between two branches
+    # @param projectLocation [String] Change directories to the projectLocation location
+    # @param branch [String] The branch you would like to merge into your project
     def self.gitMerge(projectLocation, branch)
         Dir.chdir(projectLocation) {
             `git merge #{branch}`
         }
     end
 
+    # Perform a checkout operation on a repository
+    # @param projectLocation [String] Change directories to the projectLocation location
+    # @param branch [String] The branch you would like to checkout
     def self.gitCheckout(projectLocation, branch)
         Dir.chdir(projectLocation) {
             `git checkout #{branch}`
         }
     end
 
+    # Perform a add . operation on a repository
+    # @param projectLocation [String] Change directories to the projectLocation location
     def self.gitAddAll(projectLocation)
         Dir.chdir(projectLocation) {
             `git add .`
         }
     end
 
+    # Perform a commit operation on a repository
+    # @param projectLocation [String] Change directories to the projectLocation location
+    # @param commitMessage [String] The message to add to the Git commit
     def self.gitCommit(projectLocation, commitMessage)
         Dir.chdir(projectLocation) {
             `git commit -m "#{commitMessage}"`
         }
     end
 
+    # Perform a push operation on a repository
+    # @param projectLocation [String] Change directories to the projectLocation location
     def self.gitPush(projectLocation)
         Dir.chdir(projectLocation) {
             `git push origin`
         }
     end
 
+    # Perform a tag operation on a repository
+    # @param projectLocation [String] Change directories to the projectLocation location
+    # @param tagName [String] The name of the tag to apply
     def self.gitTag(projectLocation, tagName)
         Dir.chdir(projectLocation) {
             `git tag #{tagName}`
