@@ -9,7 +9,7 @@ jobs:
   - stage: Build_lib
     script:
     - gem install bundler
-    - cd cd $HOME/build/AES-Outreach/Outreach-Ruby-Gems/outreach_gem/ && 
+    - cd $HOME/build/AES-Outreach/Outreach-Ruby-Gems/outreach_gem/ && 
       bundle install
     - cd $HOME/build/AES-Outreach/Outreach-Ruby-Gems/outreach_gem/tests/helpers/ &&
       ruby unit-tests.rb
