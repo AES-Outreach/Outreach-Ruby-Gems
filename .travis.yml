@@ -17,6 +17,8 @@ jobs:
       && ruby unit-tests.rb
     - cd $HOME/build/AES-Outreach/Outreach-Ruby-Gems/outreach_gem/tests/outreach-s3/
       && ruby unit-tests.rb
+    - cd $HOME/build/AES-Outreach/Outreach-Ruby-Gems/outreach_gem/tests/release/
+      && ruby unit-tests.rb
     before_deploy:
     - cd $HOME/build/AES-Outreach/Outreach-Ruby-Gems/outreach_gem
 stages:

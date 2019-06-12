@@ -7,3 +7,6 @@ require_relative 'rest-client/resttype'
 
 # Used to perform invocations to Amazon S3 in Ruby
 require_relative 'outreach-s3/ruby-upload-s3'
+
+# Used to perform invocations to Amazon S3 in Ruby
+require_relative 'release/release-ruby'
