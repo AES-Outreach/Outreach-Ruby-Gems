@@ -47,14 +47,31 @@ class OutreachUploadS3
         return obj
     end
 
-    # Retrieve an item from S3
+    # Retrieve an item from S3 and return it in memory
     # @param [string] The key representing the item in the bucket
     # @return [S3Object] Return the S3 Object if it exists, if not then nil
-    def getItem(item_name)
+    def getItemInRam(item_name)
         if item_name.nil? or item_name.empty?
             raise 'Cannot have an empty or nil item to retrieve from S3'
         end
         object = @s3_client.get_object(bucket: @bucketName, key: item_name)
+        if object.nil?
+            return nil
+        end
+        return object
+    end
+
+    # Retrieve an item from S3 and return it on disk
+    # @param [string] The key representing the item in the bucket
+    # @return [S3Object] Return the S3 Object if it exists, if not then nil
+    def getItemOnDisk(item_name, file_path)
+        if item_name.nil? or item_name.empty?
+            raise 'Cannot have an empty or nil item to retrieve from S3'
+        end
+        object = @s3_client.get_object(
+            response_target: file_path,
+            bucket: @bucketName, 
+            key: item_name)
         if object.nil?
             return nil
         end
