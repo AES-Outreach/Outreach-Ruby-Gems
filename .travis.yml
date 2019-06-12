@@ -8,7 +8,9 @@ jobs:
   include:
   - stage: Build_lib
     script:
-    - gem install bump
+    - gem install bundler
+    - cd cd $HOME/build/AES-Outreach/Outreach-Ruby-Gems/outreach_gem/ && 
+      bundle install
     - cd $HOME/build/AES-Outreach/Outreach-Ruby-Gems/outreach_gem/tests/helpers/ &&
       ruby unit-tests.rb
     - cd $HOME/build/AES-Outreach/Outreach-Ruby-Gems/outreach_gem/tests/rest-client/
