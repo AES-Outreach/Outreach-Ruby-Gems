@@ -1,0 +1,32 @@
+dist: xenial 
+branches:
+  only:
+  - develop
+  - master
+language: ruby
+jobs:
+  include:
+  - stage: Build_lib
+    script:
+    - gem install bump
+    - cd $HOME/build/AES-Outreach/Outreach-Ruby-Gems/outreach_gem/tests/helpers/ &&
+      ruby unit-tests.rb
+    - cd $HOME/build/AES-Outreach/Outreach-Ruby-Gems/outreach_gem/tests/helpers/ &&
+      ruby unit-tests.rb
+    before_deploy:
+    - cd $HOME/build/AES-Outreach/Outreach-Ruby-Gems/outreach_gem
+stages:
+- Build_lib
+notifications:
+  slack:
+    secure: dmA3ZY4SM4weu0qLz4M+J5gmgVhWJ2qmACIeW79uDlP+fmi9GwsRJGeH06eLVxcLWObqQUC5VxYMut3FH6+eCwRdwT4EIZ+0he8SOFUd7DAFyAF1PqeN/fILLxpu5RMqxGT1bH8akzS/ihCxyyWAaU/Hh8tN4pO+hizydvOLLlUYCvolI3pfyMtYTqW/K/iOnv/63atF6aKN55u2j5Qjr8SPav4gA0HYKR4PnT5ib+CgVeJI0RLAFJ9vIVmUAXyrLWUlw5Du1/aJ1PHr+X5mibSxi1kyhErtAAyEk8MHpfciWLOboUOfL1K87orvRvy4AaF1ki/EpF4+uXtyG/2s34t664GW5Knf8zaRPouj2eEzWIfgktIrRAwSv13B65WzYF+NZ1Jygdn+lCuG9VTAzQpaQJBCUWZ8hSafW/i46rHy+Ub6xql1oSsSle4sO0yod/lcRLBwmwcPfS528Pabrn0CXwFuglEyiKpa0W7kf+hToj0PiD7zqEEi4kPNns18vP1Etm5hFBthMHluzEi4J5xCBzhKCHTYGno8qI/1UXNFHQ2sxfBU5Y922uVX0zqEV6ZpHDrUkpZoKchc6Y42IliqyVyZpNJxqfRHOu7sGvVYHlEJeQD4sZA5btBpwQ5wxvtB9r0ft1oWRRc84Lk4KbqOeIZ5gFpPlCmAv95eINg=
+  email:
+    recipients:
+    - patrique.legault@uottawa.ca
+deploy:
+  provider: rubygems
+  api_key:
+    secure: sbap8Dr/Bb5C1ITioTVOlzbVbG/k1wnFiJDcY0Pn4koQL6G2dLyU7I6nmuUoAr1TEMV2ag8kdFHGYR0kU8hAXjKlE4dN2QGtsdseV8rXtkF2d8xldpwLsXaKAVH1wWAk2mHe1AKvpsF3NQ5WD0Z8D2darusK9A+Pblb3BqqEt8EVk3HhkEo4xZBMqj0RFEO84X19zJaf+lGqQNeYsmEXd+KAKUCci/nvpYRehAPmpqYk0/LZFMLCRoXH555i/hCG+ZQaSq5CqqfaUQ/jek4kVWXK2LsU+qXl51UaCD7VUwwMjwd8CvjpgfQ+nxuH4zTub7Xd3YbgJt6+itZF2A0IbZ7kswjYR8nCTait2Jj0Duwy3Az/g//gupdzNV+x/jcSXl1zhwiwiQBuBELbYi17aB9RFqQGrSrNmIHfwQ2mjEsN9yNxzqo8j3kH3opvp0oj29WDojXyWbW2nM9cYmOot+9pKinDeGZ0IuvsG6T2lTW9cVOgAfozUUK3DJWDMM36KWZrH43muy9nCympvQ7dpK7xycQUa2/8exkHS+GdbUFtqH1Stsd0mrw1MplfdR4jEGA9PXHQU7MMHRfRuNL6tG9GtkkYGWQ5Y+HRxYTov4QJv6pAizeXQfd/pLROJUZYWOIQsOaDdFQWrB57ElN09E+kMsiynqQcY712mjPL4kE=
+  gem: outreach_gem
+  on:
+    branch: master
