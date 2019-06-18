@@ -4,10 +4,10 @@ require "test/unit"
 class TestRestClient < Test::Unit::TestCase
     def test_connection()
         OutreachUploadS3.new(
-            key: ENV['S3_ACCESS_KEY'], 
-            secretKey: ENV['S3_SECRET_KEY'], 
-            region: 'us-west-2', 
-            bucketName: 'fb3e8922-fcb9-4042-b9f3-3f041602b5d3'
+            :key => ENV['S3_ACCESS_KEY'], 
+            :secretKey => ENV['S3_SECRET_KEY'], 
+            :region => 'us-west-2', 
+            :bucketName => 'fb3e8922-fcb9-4042-b9f3-3f041602b5d3'
         )
     end
 
@@ -15,10 +15,10 @@ class TestRestClient < Test::Unit::TestCase
         # Get a connection to the bucket
 
         outreachClient = OutreachUploadS3.new(
-            key: ENV['S3_ACCESS_KEY'], 
-            secretKey: ENV['S3_SECRET_KEY'], 
-            region: 'us-west-2', 
-            bucketName: 'fb3e8922-fcb9-4042-b9f3-3f041602b5d3'
+            :key => ENV['S3_ACCESS_KEY'], 
+            :secretKey => ENV['S3_SECRET_KEY'], 
+            :region => 'us-west-2', 
+            :bucketName => 'fb3e8922-fcb9-4042-b9f3-3f041602b5d3'
         )
 
         # Upload a file
@@ -40,10 +40,10 @@ class TestRestClient < Test::Unit::TestCase
     def test_connection_with_uploada_and_download_on_disk()
         # Get a connection to the bucket
         outreachClient = OutreachUploadS3.new(
-            key: ENV['S3_ACCESS_KEY'], 
-            secretKey: ENV['S3_SECRET_KEY'], 
-            region: 'us-west-2', 
-            bucketName: 'fb3e8922-fcb9-4042-b9f3-3f041602b5d3'
+            :key => ENV['S3_ACCESS_KEY'], 
+            :secretKey => ENV['S3_SECRET_KEY'], 
+            :region => 'us-west-2', 
+            :bucketName => 'fb3e8922-fcb9-4042-b9f3-3f041602b5d3'
         )
 
         # Upload a file
@@ -63,10 +63,10 @@ class TestRestClient < Test::Unit::TestCase
     def test_delete_bucket()
         # Get a connection to the bucket
         outreachClient = OutreachUploadS3.new(
-            key: ENV['S3_ACCESS_KEY'], 
-            secretKey: ENV['S3_SECRET_KEY'], 
-            region: 'us-west-2', 
-            bucketName: 'fb3e8922-fcb9-4042-b9f3-3f041602b5d3'
+            :key => ENV['S3_ACCESS_KEY'], 
+            :secretKey => ENV['S3_SECRET_KEY'], 
+            :region => 'us-west-2', 
+            :bucketName => 'fb3e8922-fcb9-4042-b9f3-3f041602b5d3'
         )
         outreachClient.clearBucket()
         result = outreachClient.uploadFile('./5dceb1e7-d638-4f3e-81ef-321a282fe8bc.binary', 'uOttawa/5dceb1e7-d638-4f3e-81ef-321a282fe8bc.binary')
@@ -75,9 +75,9 @@ class TestRestClient < Test::Unit::TestCase
     def test_upload_s3_key_not_nil() 
         exception = assert_raise() {
             outreachClient = OutreachUploadS3.new(
-                secretKey: ENV['S3_SECRET_KEY'], 
-                region: 'us-west-2', 
-               bucketName: 'fb3e8922-fcb9-4042-b9f3-3f041602b5d3'
+                :secretKey => ENV['S3_SECRET_KEY'], 
+                :region => 'us-west-2', 
+                :bucketName => 'fb3e8922-fcb9-4042-b9f3-3f041602b5d3'
             )
         }
         assert_equal("key cannot be empty", exception.message) 
@@ -86,9 +86,9 @@ class TestRestClient < Test::Unit::TestCase
     def test_upload_s3_secretKey_not_nil() 
         exception = assert_raise() {
             outreachClient = OutreachUploadS3.new(
-                key: ENV['S3_ACCESS_KEY'], 
-                region: 'us-west-2', 
-               bucketName: 'fb3e8922-fcb9-4042-b9f3-3f041602b5d3'
+                :key => ENV['S3_ACCESS_KEY'], 
+                :region => 'us-west-2', 
+                :bucketName => 'fb3e8922-fcb9-4042-b9f3-3f041602b5d3'
             )
         }
         assert_equal("secretKey cannot be empty", exception.message) 
@@ -97,9 +97,9 @@ class TestRestClient < Test::Unit::TestCase
     def test_upload_s3_region_not_nil() 
         exception = assert_raise() {
             outreachClient = OutreachUploadS3.new(
-                key: ENV['S3_ACCESS_KEY'], 
-                secretKey: ENV['S3_SECRET_KEY'], 
-               bucketName: 'fb3e8922-fcb9-4042-b9f3-3f041602b5d3'
+                :key => ENV['S3_ACCESS_KEY'], 
+                :secretKey => ENV['S3_SECRET_KEY'], 
+                :bucketName => 'fb3e8922-fcb9-4042-b9f3-3f041602b5d3'
             )
         }
         assert_equal("region cannot be empty", exception.message) 
@@ -108,9 +108,9 @@ class TestRestClient < Test::Unit::TestCase
     def test_upload_s3_bucketName_not_nil() 
         exception = assert_raise() {
             outreachClient = OutreachUploadS3.new(
-                key: ENV['S3_ACCESS_KEY'], 
-                secretKey: ENV['S3_SECRET_KEY'], 
-                region: 'us-west-2'
+                :key => ENV['S3_ACCESS_KEY'], 
+                :secretKey => ENV['S3_SECRET_KEY'], 
+                :region => 'us-west-2'
             )
         }
         assert_equal("bucketName cannot be empty", exception.message) 

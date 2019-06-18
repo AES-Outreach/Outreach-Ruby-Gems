@@ -6,26 +6,26 @@ class TestRestClient < Test::Unit::TestCase
 
     def test_setURI_1()
         restclient = RestClient.new(
-            uri: 'https://stackoverflow.com/questions/2024805/ruby-send-json-request', 
-            headers: {
+            :uri => 'https://stackoverflow.com/questions/2024805/ruby-send-json-request', 
+            :headers => {
                 'Content-Type' => 'application/json'
                 }, 
-            rest_type: RestTypes::POST, 
-            ssl: false, 
-            params: nil
+            :rest_type => RestTypes::POST, 
+            :ssl => false, 
+            :params => nil
             )
         assert_equal(restclient.getURI(), 'https://stackoverflow.com/questions/2024805/ruby-send-json-request')
     end
 
     def test_setURI_with_query_params()
         restclient = RestClient.new(
-            uri: 'https://stackoverflow.com/questions/2024805/ruby-send-json-request', 
-            headers: {
+            :uri => 'https://stackoverflow.com/questions/2024805/ruby-send-json-request', 
+            :headers => {
                 'Content-Type' => 'application/json'
                 }, 
-            rest_type: RestTypes::POST, 
-            ssl: false, 
-            params: {'state' => 'started'}
+            :rest_type => RestTypes::POST, 
+            :ssl => false, 
+            :params => {'state' => 'started'}
             )
 
         assert_equal(restclient.getURI(), 'https://stackoverflow.com/questions/2024805/ruby-send-json-request?state=started')
@@ -33,13 +33,13 @@ class TestRestClient < Test::Unit::TestCase
 
     def test_setURI_with_multi_query_params()
         restclient = RestClient.new(
-            uri: 'https://stackoverflow.com/questions/2024805/ruby-send-json-request', 
-            headers: {
+            :uri => 'https://stackoverflow.com/questions/2024805/ruby-send-json-request', 
+            :headers => {
                 'Content-Type' => 'application/json'
                 }, 
-            rest_type: RestTypes::POST, 
-            ssl: false, 
-            params: {'state' => 'started', 'another_state' => 'another_start'}
+            :rest_type => RestTypes::POST, 
+            :ssl => false, 
+            :params => {'state' => 'started', 'another_state' => 'another_start'}
             )
 
         assert_equal(restclient.getURI(), 'https://stackoverflow.com/questions/2024805/ruby-send-json-request?state=started&another_state=another_start')
@@ -47,13 +47,13 @@ class TestRestClient < Test::Unit::TestCase
 
     def test_setURI_with_escaped_query_params()
         restclient = RestClient.new(
-            uri: 'https://stackoverflow.com/questions/2024805/ruby-send-json-request', 
-            headers: {
+            :uri => 'https://stackoverflow.com/questions/2024805/ruby-send-json-request', 
+            :headers => {
                 'Content-Type' => 'application/json'
                 }, 
-            rest_type: RestTypes::POST, 
-            ssl: false, 
-            params: {'state' => 'AES-Outreach/Forms-Application'}
+            :rest_type => RestTypes::POST, 
+            :ssl => false, 
+            :params => {'state' => 'AES-Outreach/Forms-Application'}
             )
 
         assert_equal(restclient.getURI(), 'https://stackoverflow.com/questions/2024805/ruby-send-json-request?state=AES-Outreach%2FForms-Application')
@@ -61,63 +61,63 @@ class TestRestClient < Test::Unit::TestCase
 
     def test_setURI_2()
         restclient_1 = RestClient.new(
-            uri: 'https://stackoverflow.com/questions/2024805/ruby-send-json-request', 
-            headers: {
+            :uri => 'https://stackoverflow.com/questions/2024805/ruby-send-json-request', 
+            :headers => {
                 'Content-Type' => 'application/json'
                 }, 
-            rest_type: RestTypes::POST, 
-            ssl: false, 
-            params: nil
+            :rest_type => RestTypes::POST, 
+            :ssl => false, 
+            :params => nil
             )
         assert_equal(restclient_1.getURI(), 'https://stackoverflow.com/questions/2024805/ruby-send-json-request')
 
         restclient_2 = RestClient.new(
-            uri: 'https://stackoverflow.com/questions/2024805/ruby-send-json-request2', 
-            headers: {
+            :uri => 'https://stackoverflow.com/questions/2024805/ruby-send-json-request2', 
+            :headers => {
                 'Content-Type' => 'application/json'
                 }, 
-            rest_type: RestTypes::POST, 
-            ssl: false, 
-            params: nil
+            :rest_type => RestTypes::POST, 
+            :ssl => false, 
+            :params => nil
             )
         assert_equal(restclient_2.getURI(), 'https://stackoverflow.com/questions/2024805/ruby-send-json-request2')
     end
 
     def test_get_port()
         restclient = RestClient.new(
-            uri: 'https://stackoverflow.com/questions/2024805/ruby-send-json-request', 
-            headers: {
+            :uri => 'https://stackoverflow.com/questions/2024805/ruby-send-json-request', 
+            :headers => {
                 'Content-Type' => 'application/json'
                 }, 
-            rest_type: RestTypes::POST, 
-            ssl: false, 
-            params: nil
+            :rest_type => RestTypes::POST, 
+            :ssl => false, 
+            :params => nil
             )
         assert_equal(restclient.getPort(), 443)
     end
 
     def test_get_host()
         restclient = RestClient.new(
-            uri: 'https://stackoverflow.com/questions/2024805/ruby-send-json-request', 
-            headers: {
+            :uri => 'https://stackoverflow.com/questions/2024805/ruby-send-json-request', 
+            :headers => {
                 'Content-Type' => 'application/json'
                 }, 
-            rest_type: RestTypes::POST, 
-            ssl: false, 
-            params: nil
+            :rest_type => RestTypes::POST, 
+            :ssl => false, 
+            :params => nil
             )
         assert_equal(restclient.getHost(), 'stackoverflow.com')
     end
 
     def test_set_body()
         restclient = RestClient.new(
-            uri: 'https://stackoverflow.com/questions/2024805/ruby-send-json-request', 
-            headers: {
+            :uri => 'https://stackoverflow.com/questions/2024805/ruby-send-json-request', 
+            :headers => {
                 'Content-Type' => 'application/json'
                 }, 
-            rest_type: RestTypes::POST, 
-            ssl: false, 
-            params: nil
+            :rest_type => RestTypes::POST, 
+            :ssl => false, 
+            :params => nil
             )
 
         restclient.setBody(
@@ -129,15 +129,15 @@ class TestRestClient < Test::Unit::TestCase
     def test_get()
 
         restclient = RestClient.new(
-            uri: 'https://api.travis-ci.com/builds', 
-            headers: {
+            :uri => 'https://api.travis-ci.com/builds', 
+            :headers => {
                 'Content-Type' => 'application/json',
                 'Travis-API-Version' => '3',
                 'Authorization' => "token #{ENV['TRAVIS_TOKEN']}"
             },
-            rest_type: RestTypes::GET, 
-            ssl: true, 
-            params: nil
+            :rest_type => RestTypes::GET, 
+            :ssl => true, 
+            :params => nil
             )
         response = restclient.get()
 
@@ -147,15 +147,15 @@ class TestRestClient < Test::Unit::TestCase
 
     def test_get2()
         restclient = RestClient.new(
-            uri: 'https://api.travis-ci.com/repo/AES-Outreach%2FForms-Application/builds', 
-            headers: {
+            :uri => 'https://api.travis-ci.com/repo/AES-Outreach%2FForms-Application/builds', 
+            :headers => {
                 'Content-Type' => 'application/json',
                 'Travis-API-Version' => '3',
                 'Authorization' => "token #{ENV['TRAVIS_TOKEN']}"
             },
-            rest_type: RestTypes::GET, 
-            ssl: true, 
-            params:  {'state' => 'started'}
+            :rest_type => RestTypes::GET, 
+            :ssl => true, 
+            :params =>  {'state' => 'started'}
             )
 
         response =  restclient.get()
@@ -171,16 +171,16 @@ class TestRestClient < Test::Unit::TestCase
     def test_trigger_travis_build()
 
         restclient = RestClient.new(
-            uri: 'https://api.travis-ci.com/repo/AES-Outreach%2FWebconsole-Branding/requests', 
-            headers: {
+            :uri => 'https://api.travis-ci.com/repo/AES-Outreach%2FWebconsole-Branding/requests', 
+            :headers => {
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
                 'Travis-API-Version' => '3',
                 'Authorization' => "token #{ENV['TRAVIS_TOKEN']}"
             },
-            rest_type: RestTypes::POST, 
-            ssl: true, 
-            params:  nil
+            :rest_type => RestTypes::POST, 
+            :ssl => true, 
+            :params =>  nil
             )
         restclient.setBody({
             "request": {
