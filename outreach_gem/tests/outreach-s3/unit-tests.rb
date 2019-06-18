@@ -13,6 +13,7 @@ class TestRestClient < Test::Unit::TestCase
 
     def test_connection_with_uploada_and_download_in_ram()
         # Get a connection to the bucket
+
         outreachClient = OutreachUploadS3.new(
             key: ENV['S3_ACCESS_KEY'], 
             secretKey: ENV['S3_SECRET_KEY'], 

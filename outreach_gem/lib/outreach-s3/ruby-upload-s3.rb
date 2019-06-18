@@ -12,12 +12,12 @@ class OutreachUploadS3
     # )
 
     def initialize(parameters)
-        if parameters.fetch(:secretKey, nil).nil?
-            raise 'secretKey cannot be empty'
-        end
-
         if parameters.fetch(:key, nil).nil?
             raise 'key cannot be empty'
+        end
+        
+        if parameters.fetch(:secretKey, nil).nil?
+            raise 'secretKey cannot be empty'
         end
 
         if parameters.fetch(:region, nil).nil?
