@@ -254,7 +254,7 @@ class TestRestClient < Test::Unit::TestCase
         assert_equal("ssl cannot be empty", exception.message) 
     end
 
-    def test_params_can_be_nil() 
+    def test_params_can_be_ommited() 
         assert_nothing_raised do
             RestClient.new(
             :uri => 'https://stackoverflow.com/questions/2024805/ruby-send-json-request',
@@ -266,6 +266,7 @@ class TestRestClient < Test::Unit::TestCase
             )
         end
     end
+
 
     def test_other_order_initialization() 
         assert_nothing_raised do
