@@ -199,4 +199,87 @@ class TestRestClient < Test::Unit::TestCase
         assert_not_nil(response)
         assert_equal(response.code, "202")
     end
+
+    def test_uri_not_nil() 
+        exception = assert_raise() {
+            RestClient.new(
+            :headers => {
+                'Content-Type' => 'application/json',
+            },
+            :rest_type => RestTypes::POST, 
+            :ssl => true, 
+            :params =>  nil
+            )
+        }
+        assert_equal("uri cannot be empty", exception.message) 
+    end
+
+    def test_headers_not_nil() 
+        exception = assert_raise() {
+            RestClient.new(
+            :uri => 'https://stackoverflow.com/questions/2024805/ruby-send-json-request',
+            :rest_type => RestTypes::POST, 
+            :ssl => true, 
+            :params =>  nil
+            )
+        }
+        assert_equal("headers cannot be empty", exception.message) 
+    end
+
+    def test_rest_type_not_nil() 
+        exception = assert_raise() {
+            RestClient.new(
+            :uri => 'https://stackoverflow.com/questions/2024805/ruby-send-json-request',
+            :headers => {
+                'Content-Type' => 'application/json',
+            },
+            :ssl => true, 
+            :params =>  nil
+            )
+        }
+        assert_equal("rest_type cannot be empty", exception.message) 
+    end
+
+    def test_ssl_not_nil() 
+        exception = assert_raise() {
+            RestClient.new(
+            :uri => 'https://stackoverflow.com/questions/2024805/ruby-send-json-request',
+            :headers => {
+                'Content-Type' => 'application/json',
+            },
+            :rest_type => RestTypes::POST, 
+            :params =>  nil
+            )
+        }
+        assert_equal("ssl cannot be empty", exception.message) 
+    end
+
+    def test_params_can_be_nil() 
+        assert_nothing_raised do
+            RestClient.new(
+            :uri => 'https://stackoverflow.com/questions/2024805/ruby-send-json-request',
+            :headers => {
+                'Content-Type' => 'application/json',
+            },
+            :rest_type => RestTypes::POST, 
+            :ssl => true
+            )
+        end
+    end
+
+    def test_other_order_initialization() 
+        assert_nothing_raised do
+            RestClient.new(
+            :params =>  nil,
+            :headers => {
+                'Content-Type' => 'application/json',
+            },
+            :uri => 'https://stackoverflow.com/questions/2024805/ruby-send-json-request',
+            :ssl => true, 
+            :rest_type => RestTypes::POST, 
+            )
+        end
+    end
+
+
 end

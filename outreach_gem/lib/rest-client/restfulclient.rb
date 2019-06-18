@@ -47,7 +47,7 @@ class RestClient
             @http.use_ssl = true
         end
         
-        if parameters.fetch(:params).nil?
+        if parameters.fetch(:params, nil).nil?
             if RestTypes::POST === parameters.fetch(:rest_type)
                 @req = Net::HTTP::Post.new(@uri.path, parameters.fetch(:headers))
             elsif  RestTypes::GET === parameters.fetch(:rest_type)

@@ -115,5 +115,16 @@ class TestRestClient < Test::Unit::TestCase
         }
         assert_equal("bucketName cannot be empty", exception.message) 
     end
+
+    def test_upload_s3_other_order_initialization() 
+        assert_nothing_raised do
+            outreachClient = OutreachUploadS3.new(
+                :region => 'us-west-2',
+                :key => ENV['S3_ACCESS_KEY'], 
+                :bucketName => 'fb3e8922-fcb9-4042-b9f3-3f041602b5d3',
+                :secretKey => ENV['S3_SECRET_KEY']
+            )
+        end
+    end
         
 end
