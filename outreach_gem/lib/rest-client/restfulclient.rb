@@ -7,35 +7,58 @@ require_relative 'resttype'
 class RestClient
 
     # Initalize the object to perform the operations
-    # @param uri [String] The URL to perform the request against
-    # @param headers [Hash] Object that resembles the following structure
-    # {
-    #    'Content-Type' => 'application/json'
-    # }
-    # @param rest_type [resttype] Module that defines the type of operation that we are about to perform
-    # @param ssl [Boolean] True -> SSL is enabled. False -> SSL is disabled
-    # @param params [Hash] Is an object that represents the query string parameters to assign to the URL within the give
+    # @param parameters [Hash] Is an object that represents the parameters for the initialization of this component
     # restful invocation {'state' => 'started'}
-    def initialize(uri, headers, rest_type, ssl, params)
-        @uri = URI(uri)
+    # example of input format: 
+    # RestClient.new(
+    # uri: 'https://api.travis-ci.com/repo/AES-Outreach%2FForms-Application/builds',  ([String] The URL to perform the request against)
+    # headers: { [Hash] Object that resembles the following structure
+    #     'Content-Type' => 'application/json'
+    # },
+    # rest_type: RestTypes::GET, [resttype] Module that defines the type of operation that we are about to perform
+    # ssl: true, [Boolean] True -> SSL is enabled. False -> SSL is disabled
+    # params:  {'state' => 'started'} [Hash] Is an object that represents the query string parameters to assign to the URL within the give
+    # )
+
+
+    def initialize(parameters)
+        
+        if parameters.fetch(:uri, nil).nil?
+            raise 'uri cannot be empty'
+        end
+
+        if parameters.fetch(:headers, nil).nil?
+            raise 'headers cannot be empty'
+        end
+
+        if parameters.fetch(:rest_type, nil).nil?
+            raise 'rest_type cannot be empty'
+        end
+        
+        if parameters.fetch(:ssl, nil).nil?
+            raise 'ssl cannot be empty'
+        end
+
+
+        @uri = URI(parameters.fetch(:uri))
         @http = Net::HTTP.new(@uri.host, @uri.port)
 
-        if ssl === true
+        if parameters.fetch(:ssl) === true
             @http.use_ssl = true
         end
         
-        if params.nil?
-            if RestTypes::POST === rest_type
-                @req = Net::HTTP::Post.new(@uri.path, headers)
-            elsif  RestTypes::GET === rest_type
-                @req = Net::HTTP::Get.new(@uri.path, headers)
+        if parameters.fetch(:params).nil?
+            if RestTypes::POST === parameters.fetch(:rest_type)
+                @req = Net::HTTP::Post.new(@uri.path, parameters.fetch(:headers))
+            elsif  RestTypes::GET === parameters.fetch(:rest_type)
+                @req = Net::HTTP::Get.new(@uri.path, parameters.fetch(:headers))
             end
         else
-            @uri.query = URI.encode_www_form( params )
-            if RestTypes::POST === rest_type
-                @req = Net::HTTP::Post.new(@uri.path + '?' + @uri.query, headers)
-            elsif  RestTypes::GET === rest_type
-                @req = Net::HTTP::Get.new(@uri.path + '?' + @uri.query, headers)
+            @uri.query = URI.encode_www_form(parameters.fetch(:params))
+            if RestTypes::POST === parameters.fetch(:rest_type)
+                @req = Net::HTTP::Post.new(@uri.path + '?' + @uri.query, parameters.fetch(:headers))
+            elsif  RestTypes::GET === parameters.fetch(:rest_type)
+                @req = Net::HTTP::Get.new(@uri.path + '?' + @uri.query, parameters.fetch(:headers))
             end
         end
         
