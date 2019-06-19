@@ -2,36 +2,42 @@ require 'aws-sdk-s3'
 
 class OutreachUploadS3
 
-    # @param key [String] Name of the key used to access AWS
-    # @param secret [String] Name of the secret key used to access AWS
-    # @param region [String] Name of the region of the bucket
-    # @param bucketName [String] Name of the S3 Bucket
-    def initialize(key, secretKey, region, bucketName)
-        if secretKey.empty?
+    # @param parameters Is an object that represents the parameters for the initialization of this component 
+    # example of input format: 
+    # outreachClient = OutreachUploadS3.new(
+    #     key: ENV['S3_ACCESS_KEY'], [String] Name of the key used to access AWS
+    #     secretKey: ENV['S3_SECRET_KEY'], [String] Name of the secret key used to access AWS
+    #     region: 'us-west-2', [String] Name of the region of the bucket
+    #     bucketName: 'fb3e8922-fcb9-4042-b9f3-3f041602b5d3' [String] Name of the S3 Bucket
+    # )
+
+    def initialize(parameters)
+        if parameters.fetch(:key, nil).nil?
+            raise 'key cannot be empty'
+        end
+        
+        if parameters.fetch(:secretKey, nil).nil?
             raise 'secretKey cannot be empty'
         end
 
-        if key.empty?
-            raise 'key cannot be empty'
-        end
-
-        if region.empty?
+        if parameters.fetch(:region, nil).nil?
             raise 'region cannot be empty'
         end
 
-        if bucketName.empty?
+        if parameters.fetch(:bucketName, nil).nil?
             raise 'bucketName cannot be empty'
         end
-        @region = region
-        @bucketName = bucketName
+
+        @region = parameters.fetch(:region)
+        @bucketName = parameters.fetch(:bucketName)
        
         Aws.config.update({
-            credentials: Aws::Credentials.new(key, secretKey)
+            credentials: Aws::Credentials.new(parameters.fetch(:key), parameters.fetch(:secretKey))
         })
         @s3_client = Aws::S3::Client.new({
             region:            @region,
-            access_key_id:     key,
-            secret_access_key: secretKey
+            access_key_id:     parameters.fetch(:key),
+            secret_access_key: parameters.fetch(:secretKey)
         })
     end
 
