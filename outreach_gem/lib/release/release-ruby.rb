@@ -110,4 +110,16 @@ class Release
         new_contents = file.sub(from, to)
         return new_contents
     end
+
+    # This function will change the contents of a file.
+    # The function takes the text `from` and converts it `to`
+    # It then returns the file as a response
+    # @param file [File] A file to be changed
+    # @param from [Regex] A regex value to apply to the system
+    # @param to [String] The String value to change the from value too
+    # @result new_contents [File] The changed file
+    def self.changeVersionNumberGsub(file, from, to)
+        new_contents = file.gsub(from, to)
+        return new_contents
+    end
 end
