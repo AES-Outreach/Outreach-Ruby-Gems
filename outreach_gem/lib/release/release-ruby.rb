@@ -111,6 +111,7 @@ class Release
         return new_contents
     end
 
+    # http://icfun.blogspot.com/2008/07/ruby-use-variable-inside-regex.html
     # This function will change the contents of a file.
     # The function takes the text `from` and converts it `to`
     # It then returns the file as a response

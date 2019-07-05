@@ -2,7 +2,7 @@ require_relative "../../lib/release/release-ruby"
 require "test/unit"
 
 class TestReleaseRuby < Test::Unit::TestCase
-    # http://icfun.blogspot.com/2008/07/ruby-use-variable-inside-regex.html
+    
     def test_split
         var_1 = Release.increaseVersion('1.1.8', 'minor')
         assert_equal('1.1.9', var_1)
