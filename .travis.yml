@@ -6,6 +6,7 @@ language: ruby
 jobs:
   include:
   - stage: Build_lib
+    name: "Test Lib and Deploy"
     script:
     - gem install bundler
     - cd $HOME/build/AES-Outreach/Outreach-Ruby-Gems/outreach_gem/ && 
