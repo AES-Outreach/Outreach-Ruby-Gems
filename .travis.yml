@@ -6,25 +6,24 @@ language: ruby
 jobs:
   include:
   - stage: Build_lib
-    name: "Test Lib and Deploy"
+    name: Test Lib and Deploy
     script:
     - gem install bundler
-    - cd $HOME/build/AES-Outreach/Outreach-Ruby-Gems/outreach_gem/ && 
-      bundle install
+    - cd $HOME/build/AES-Outreach/Outreach-Ruby-Gems/outreach_gem/ && bundle install
     - cd $HOME/build/AES-Outreach/Outreach-Ruby-Gems/outreach_gem/tests/helpers/ &&
       ruby unit-tests.rb
     - cd $HOME/build/AES-Outreach/Outreach-Ruby-Gems/outreach_gem/tests/rest-client/
       && ruby unit-tests.rb
     - cd $HOME/build/AES-Outreach/Outreach-Ruby-Gems/outreach_gem/tests/outreach-s3/
       && ruby unit-tests.rb
-    - cd $HOME/build/AES-Outreach/Outreach-Ruby-Gems/outreach_gem/tests/release/
-      && ruby unit-tests.rb
+    - cd $HOME/build/AES-Outreach/Outreach-Ruby-Gems/outreach_gem/tests/release/ &&
+      ruby unit-tests.rb
     before_deploy:
     - cd $HOME/build/AES-Outreach/Outreach-Ruby-Gems/outreach_gem
     after_success:
-      - cd $HOME/build/AES-Outreach/Outreach-Ruby-Gems
-      - git tag 1.0.$TRAVIS_BUILD_NUMBER
-      - git push origin --tags
+    - cd $HOME/build/AES-Outreach/Outreach-Ruby-Gems
+    - git tag 1.0.$TRAVIS_BUILD_NUMBER
+    - git push origin --tags
 stages:
 - Build_lib
 notifications:
@@ -36,7 +35,7 @@ notifications:
 deploy:
   provider: rubygems
   api_key:
-    secure: sbap8Dr/Bb5C1ITioTVOlzbVbG/k1wnFiJDcY0Pn4koQL6G2dLyU7I6nmuUoAr1TEMV2ag8kdFHGYR0kU8hAXjKlE4dN2QGtsdseV8rXtkF2d8xldpwLsXaKAVH1wWAk2mHe1AKvpsF3NQ5WD0Z8D2darusK9A+Pblb3BqqEt8EVk3HhkEo4xZBMqj0RFEO84X19zJaf+lGqQNeYsmEXd+KAKUCci/nvpYRehAPmpqYk0/LZFMLCRoXH555i/hCG+ZQaSq5CqqfaUQ/jek4kVWXK2LsU+qXl51UaCD7VUwwMjwd8CvjpgfQ+nxuH4zTub7Xd3YbgJt6+itZF2A0IbZ7kswjYR8nCTait2Jj0Duwy3Az/g//gupdzNV+x/jcSXl1zhwiwiQBuBELbYi17aB9RFqQGrSrNmIHfwQ2mjEsN9yNxzqo8j3kH3opvp0oj29WDojXyWbW2nM9cYmOot+9pKinDeGZ0IuvsG6T2lTW9cVOgAfozUUK3DJWDMM36KWZrH43muy9nCympvQ7dpK7xycQUa2/8exkHS+GdbUFtqH1Stsd0mrw1MplfdR4jEGA9PXHQU7MMHRfRuNL6tG9GtkkYGWQ5Y+HRxYTov4QJv6pAizeXQfd/pLROJUZYWOIQsOaDdFQWrB57ElN09E+kMsiynqQcY712mjPL4kE=
+    secure: DRORbRNO1QlmauwRRJQK377nSaSwg8oDM4wNykZNT5a4079G3tJ/NrKL+p2V2pk++WtAIHKJv+dmyiTu/k1PT/GfdCZC5t/Ae05+UfGbyBVrNxWnHY8lKTEWDDoFPDB1azHTJNmpxtaFVg/gGUVxaFjlpct+41PWz1WD72Or0pMQ02C2RPw+S7Hux6opkIspwc5VqBbcUUSpAxKeH2G+ffK3PmHTOuE6Kg/roswAIqJqDDtKjz5/9PmCCVT+5TKF9iTtLumDWxPrPWXbwf6cf3iBU1M4WE7jncH4CQUQOvkecyHiu5MXR8RkEXVfAikbiKWpouyz35KscD2J5PD4S4QdRn0uWZzexptkftWGnDIvl7Pid9FkBsHmki3/7B5wlwOLtK2CLNLFatVcEYCjF28fa9E516spyL4iVtfiQf+MzC/jZe8KL1GBnK0RLzDfG8RpXerCh3yHf3j1er/4Icgk97NmvXI4eWuDMM6UrdYwf7019g46ZSzitz0Bjr7/UGLeDtOpLvbgL93+/hL1wl07Fe2FNzx01j2blgUIBdSIdJ6lkYx/kFfLA1gBtkmoc3UPshsJBkg/dX1m6lqmTQA2X/IGAoe7cPWu8CNDrmZwKgx2dCcfAGtcm8db3lmv5DBJ3IDoMydD8Cxz15wgr41yMTgSu9YqGU2+K+nHwrk=
   gem: outreach_gem
   on:
     branch: master
