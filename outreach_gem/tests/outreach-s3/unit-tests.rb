@@ -37,6 +37,40 @@ class TestRestClient < Test::Unit::TestCase
         assert_true(outreachClient.deleteFile('5dceb1e7-d638-4f3e-81ef-321a282fe8bc.binary').delete_marker)
     end
 
+    def test_connection_with_upload_and_fail_nil_path()
+        # Get a connection to the bucket
+
+        outreachClient = OutreachUploadS3.new(
+            :key => ENV['S3_ACCESS_KEY'], 
+            :secretKey => ENV['S3_SECRET_KEY'], 
+            :region => 'us-west-2', 
+            :bucketName => 'fb3e8922-fcb9-4042-b9f3-3f041602b5d3'
+        )
+
+        exception = assert_raise() {
+            # Upload a file
+            result = outreachClient.uploadFile(nil, '5dceb1e7-d638-4f3e-81ef-321a282fe8bc.binary')
+        }
+        assert_equal('Cannot have an empty path when attempting to upload an object to AWS S3', exception.message) 
+    end
+
+    def test_connection_with_upload_and_fail_nil_key()
+        # Get a connection to the bucket
+
+        outreachClient = OutreachUploadS3.new(
+            :key => ENV['S3_ACCESS_KEY'], 
+            :secretKey => ENV['S3_SECRET_KEY'], 
+            :region => 'us-west-2', 
+            :bucketName => 'fb3e8922-fcb9-4042-b9f3-3f041602b5d3'
+        )
+
+        exception = assert_raise() {
+            # Upload a file
+            result = outreachClient.uploadFile('nil', nil)
+        }
+        assert_equal('Cannot have an empty key when uploading an Object to S3', exception.message) 
+    end
+
     def test_connection_with_uploada_and_download_on_disk()
         # Get a connection to the bucket
         outreachClient = OutreachUploadS3.new(
@@ -48,6 +82,7 @@ class TestRestClient < Test::Unit::TestCase
 
         # Upload a file
         result = outreachClient.uploadFile('./5dceb1e7-d638-4f3e-81ef-321a282fe8bc.binary', '5dceb1e7-d638-4f3e-81ef-321a282fe8bc.binary')
+        puts result
         assert_false(result.nil?)
 
         # Retrieve the uploaded item
@@ -125,6 +160,5 @@ class TestRestClient < Test::Unit::TestCase
                 :secretKey => ENV['S3_SECRET_KEY']
             )
         end
-    end
-        
+    end 
 end

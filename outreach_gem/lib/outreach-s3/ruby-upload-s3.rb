@@ -41,16 +41,32 @@ class OutreachUploadS3
         })
     end
 
+    # When it comes to binary files you should be doing open then the read
+    # operations to it. Must not forget to close the file when performing 
+    # an open operation on it.
     # @param path [String] path to the file that needs to be uploaded
     # @param key [String] the name of the object to upload
+    # @return obj [Hashes] the resulting object being returned from AWS S3
     def uploadFile(path, key)
-        content = File.read path
-        obj = @s3_client.put_object({
-            body: content,
-            bucket: @bucketName,
-            key: key
-        })
-        return obj
+        if path.nil? or path.empty?
+            raise 'Cannot have an empty path when attempting to upload an object to AWS S3'
+        end
+
+        if key.nil? or key.empty?
+            raise 'Cannot have an empty key when uploading an Object to S3'
+        end
+
+        begin
+            # Open the file and get it ready to be read
+            file = File.open(path, 'rb')
+
+            # Stream the file into the S3 bucket
+            return @s3_client.put_object(bucket: @bucketName, key: key, body: file)
+        ensure
+            unless file.nil?
+                file.close
+            end
+        end
     end
 
     # Retrieve an item from S3 and return it in memory
