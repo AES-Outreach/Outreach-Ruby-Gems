@@ -82,7 +82,6 @@ class TestRestClient < Test::Unit::TestCase
 
         # Upload a file
         result = outreachClient.uploadFile('./5dceb1e7-d638-4f3e-81ef-321a282fe8bc.binary', '5dceb1e7-d638-4f3e-81ef-321a282fe8bc.binary')
-        puts result
         assert_false(result.nil?)
 
         # Retrieve the uploaded item
