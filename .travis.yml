@@ -34,8 +34,7 @@ notifications:
     - patrique.legault@uottawa.ca
 deploy:
   provider: rubygems
-  api_key:
-    secure: DRORbRNO1QlmauwRRJQK377nSaSwg8oDM4wNykZNT5a4079G3tJ/NrKL+p2V2pk++WtAIHKJv+dmyiTu/k1PT/GfdCZC5t/Ae05+UfGbyBVrNxWnHY8lKTEWDDoFPDB1azHTJNmpxtaFVg/gGUVxaFjlpct+41PWz1WD72Or0pMQ02C2RPw+S7Hux6opkIspwc5VqBbcUUSpAxKeH2G+ffK3PmHTOuE6Kg/roswAIqJqDDtKjz5/9PmCCVT+5TKF9iTtLumDWxPrPWXbwf6cf3iBU1M4WE7jncH4CQUQOvkecyHiu5MXR8RkEXVfAikbiKWpouyz35KscD2J5PD4S4QdRn0uWZzexptkftWGnDIvl7Pid9FkBsHmki3/7B5wlwOLtK2CLNLFatVcEYCjF28fa9E516spyL4iVtfiQf+MzC/jZe8KL1GBnK0RLzDfG8RpXerCh3yHf3j1er/4Icgk97NmvXI4eWuDMM6UrdYwf7019g46ZSzitz0Bjr7/UGLeDtOpLvbgL93+/hL1wl07Fe2FNzx01j2blgUIBdSIdJ6lkYx/kFfLA1gBtkmoc3UPshsJBkg/dX1m6lqmTQA2X/IGAoe7cPWu8CNDrmZwKgx2dCcfAGtcm8db3lmv5DBJ3IDoMydD8Cxz15wgr41yMTgSu9YqGU2+K+nHwrk=
+  api_key: $RUBY_TOKEN
   gem: outreach_gem
   on:
     branch: master
