@@ -4,8 +4,8 @@ Gem::Specification.new do |s|
     s.date          = Time.now.strftime('%Y-%m-%d')
     s.licenses      = ['MIT']
     s.summary       = %q{outreach_gem is a utility used at Outreach in order to manage deployments and builds}
-    s.authors       = ["Patrique Legault"]
-    s.email         = 'patrique.legault@uottawa.ca'
+    s.authors       = ["Outstem"]
+    s.email         = 'outstem@uottawa.ca'
     s.homepage      = "https://github.com/AES-Outreach/Outreach-Ruby-Gems"
     s.metadata      = {
         "allowed_push_host" => 'https://rubygems.org'
