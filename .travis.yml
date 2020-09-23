@@ -26,12 +26,6 @@ jobs:
     - git push origin --tags
 stages:
 - Build_lib
-notifications:
-  slack:
-    secure: dmA3ZY4SM4weu0qLz4M+J5gmgVhWJ2qmACIeW79uDlP+fmi9GwsRJGeH06eLVxcLWObqQUC5VxYMut3FH6+eCwRdwT4EIZ+0he8SOFUd7DAFyAF1PqeN/fILLxpu5RMqxGT1bH8akzS/ihCxyyWAaU/Hh8tN4pO+hizydvOLLlUYCvolI3pfyMtYTqW/K/iOnv/63atF6aKN55u2j5Qjr8SPav4gA0HYKR4PnT5ib+CgVeJI0RLAFJ9vIVmUAXyrLWUlw5Du1/aJ1PHr+X5mibSxi1kyhErtAAyEk8MHpfciWLOboUOfL1K87orvRvy4AaF1ki/EpF4+uXtyG/2s34t664GW5Knf8zaRPouj2eEzWIfgktIrRAwSv13B65WzYF+NZ1Jygdn+lCuG9VTAzQpaQJBCUWZ8hSafW/i46rHy+Ub6xql1oSsSle4sO0yod/lcRLBwmwcPfS528Pabrn0CXwFuglEyiKpa0W7kf+hToj0PiD7zqEEi4kPNns18vP1Etm5hFBthMHluzEi4J5xCBzhKCHTYGno8qI/1UXNFHQ2sxfBU5Y922uVX0zqEV6ZpHDrUkpZoKchc6Y42IliqyVyZpNJxqfRHOu7sGvVYHlEJeQD4sZA5btBpwQ5wxvtB9r0ft1oWRRc84Lk4KbqOeIZ5gFpPlCmAv95eINg=
-  email:
-    recipients:
-    - patrique.legault@uottawa.ca
 deploy:
   provider: rubygems
   api_key: $RUBY_TOKEN
